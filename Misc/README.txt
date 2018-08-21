@@ -1,0 +1,1 @@
+After decompressing the .rar file, use [ArduinoOrientation.exe] for starting the application.

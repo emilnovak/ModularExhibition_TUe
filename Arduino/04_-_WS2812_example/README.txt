@@ -1,0 +1,1 @@
+Move the content of the [Libraries] folder to your Arduino libraies path. In case of Windows machines it is "C:\Users\[You]\Documents\Arduino\libraries\".
