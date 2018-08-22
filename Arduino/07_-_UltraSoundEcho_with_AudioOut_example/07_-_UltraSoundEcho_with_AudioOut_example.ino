@@ -55,6 +55,7 @@ long microsecondsToMillimeters(long microseconds) {
 }
 
 void setup() {
+  pinMode(speakerPin, OUTPUT);
   pinMode(trigPin, OUTPUT);
 
   //set pin interrupt on echoPin, calling echoEvent()
