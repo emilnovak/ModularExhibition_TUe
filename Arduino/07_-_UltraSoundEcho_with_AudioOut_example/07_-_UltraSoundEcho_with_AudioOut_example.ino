@@ -107,10 +107,11 @@ void loop() {
   //Writing to serial (if havind valid reading)
   if ((measuredTime <= 6000) && (measuredTime > 10) && (currentMicros - previousMicrosComm >= commInterval)){
     //cm = microsecondsToCentimeters(measuredTime);
-    
-    Serial.print(cm);
+
+    Serial.println(mm);
+    //Serial.print(cm);
     //Serial.print(" cm");
-    Serial.println();
+    //Serial.println();
 
     previousMicrosComm = currentMicros;
   }
