@@ -32,8 +32,7 @@ void loop() {
   for (uint8_t i = 1; i < WIDTH; i++) {
     frameBuffer[i - 1] = frameBuffer[i];
   }
-  frameBuffer[WIDTH - 1] = map(analogRead(0), 0, 1023, 0, 63);
-
+  frameBuffer[WIDTH - 1] = constraint(map(analogRead(0), 0, 1023, 0, HEIGHT - 1), 0, HEIGHT - 1);
 
   display.clearDisplay();
   for (uint8_t i = 0; i < WIDTH; i++) {
