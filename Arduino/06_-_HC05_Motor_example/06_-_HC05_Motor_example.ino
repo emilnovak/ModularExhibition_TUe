@@ -39,7 +39,9 @@ void loop() {
     data = "";
     while (Serial.available()) {
       char c = Serial.read();
-      data += c;
+      if ((c != '\n') && (c != '\r')) {
+        data += c;
+      }
     }
 
     if (data == "upPress") {
@@ -104,4 +106,3 @@ void updateMotors() {
     digitalWrite(MOTOR1_PIN2, LOW);
   }
 }
-
