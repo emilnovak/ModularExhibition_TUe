@@ -11,6 +11,8 @@ String data;
 
 int motor1Target = 0;
 int motor1Speed = 0;
+int motor2Target = 0;
+int motor2Speed = 0;
 int motorStep = 10;
 
 Servo servo;
@@ -57,16 +59,16 @@ void loop() {
       Stop();
     }
     else if (data == "leftPress") {
-      servo.write(0);
+      left();
     }
     else if (data == "leftRelease") {
-      servo.write(90);
+      Stop();
     }
     else if (data == "rightPress") {
-      servo.write(180);
+      right();
     }
     else if (data == "rightRelease") {
-      servo.write(90);
+      Stop();
     }
   }
 
@@ -76,14 +78,27 @@ void loop() {
 
 void forward() {
   motor1Target = 255;
+  motor2Target = 255;
 }
 
 void Stop() {
   motor1Target = 0;
+  motor2Target = 0;
 }
 
 void backward() {
   motor1Target = -255;
+  motor2Target = -255;
+}
+
+void left () {
+  motor1Target = 255;
+  motor2Target = -255;
+}
+
+void right () {
+  motor1Target = -255;
+  motor2Target = 255;
 }
 
 void updateMotors() {
@@ -104,5 +119,24 @@ void updateMotors() {
   } else {
     digitalWrite(MOTOR1_PIN1, LOW);
     digitalWrite(MOTOR1_PIN2, LOW);
+  }
+
+  if (motor2Target > motor2Speed + motorStep) {
+    motor2Speed += motorStep;
+  } else if (motor2Target < motor2Speed - motorStep) {
+    motor2Speed -= motorStep;
+  } else {
+    motor2Speed = motor2Target;
+  }
+
+  if (motor2Speed > 0) {
+    digitalWrite(MOTOR2_PIN1, LOW);
+    analogWrite(MOTOR2_PIN2, motor2Speed);
+  } else if (motor2Speed < 0) {
+    digitalWrite(MOTOR2_PIN2, LOW);
+    analogWrite(MOTOR2_PIN1, abs(motor2Speed));
+  } else {
+    digitalWrite(MOTOR2_PIN1, LOW);
+    digitalWrite(MOTOR2_PIN2, LOW);
   }
 }
